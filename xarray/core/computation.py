@@ -1,6 +1,7 @@
 """
 Functions for applying functions that act on arrays to xarray's labeled data.
 """
+import copy
 import functools
 import itertools
 import operator
@@ -1013,6 +1014,7 @@ def apply_ufunc(
     if dask == "parallelized":
         if dask_gufunc_kwargs is None:
             dask_gufunc_kwargs = {}
+        dask_gufunc_kwargs = copy.deepcopy(dask_gufunc_kwargs)
         # todo: remove warnings after deprecation cycle
         if meta is not None:
             warnings.warn(
